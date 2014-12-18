@@ -62,7 +62,7 @@ trait Loader {
 						$this->load( $value , $key);
 					}
 					else {
-						$this->load($value);
+						$this->load( $value );
 					}
 				}
 
@@ -73,23 +73,6 @@ trait Loader {
 	//=========================================================================
 	// Методы загрузки классов :
 	//=========================================================================
-
-	private function load_class_by_string( $class, $alias = NULL )
-	{
-		$exp = explode( '\\', $class );
-
-		if ( count( $exp ) > 1 ) {
-			$this->load_namespace_class( $class, $exp );
-		}
-		else {
-			if ( $name === NULL ) {
-				$this->load_class( $class, strtolower( $class ) );
-			}
-			else {
-				$this->load_class( $class, $name );
-			}
-		}
-	}
 
 	private function &load_class( $class, $alias )
 	{
