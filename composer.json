@@ -7,7 +7,6 @@
 		"email": "olius-pop@ya.ru"
 		}
 	],
-	"minimum-stability": "dev",
 	"require": {},
 	"autoload" : {
 		"psr-0": {
