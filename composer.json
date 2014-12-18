@@ -1,0 +1,17 @@
+{
+	"name": "mmphoze/library",
+	"license": "BSD 2-Clause",
+	"authors": [
+		{
+		"name": "Andrei Galkin",
+		"email": "olius-pop@ya.ru"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {},
+	"autoload" : {
+		"psr-0": {
+			"Metamorphoze\\": "src/"
+		}
+	}
+}
