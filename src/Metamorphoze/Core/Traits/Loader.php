@@ -2,6 +2,8 @@
 
 namespace Metamorphoze\Core\Traits;
 
+use Metamorphoze\Helpers\Core;
+
 trait Loader {
 
 	//=========================================================================
@@ -76,33 +78,27 @@ trait Loader {
 
 	private function &load_class( $class, $alias )
 	{
+		if ( $alias === NULL ) {
+			$name = prepare_namespace( $class );
+		}
+		else {
+			$name = prepare_namespace( $alias );
+		}
+		
+		return $this->{$name} = new $class();
 		
 	}
 
 	private function &load_object( &$class, $alias )
 	{
 		if ( $alias === NULL ) {
-			$name = $this->prepare_namespace( get_class( $class ) );
+			$name = prepare_namespace( get_class( $class ) );
 		}
 		else {
-			$name = $this->prepare_namespace( $alias );
+			$name = prepare_namespace( $alias );
 		}
 		
 		return $this->{$name} = $class;
-	}
-
-	/**
-	 * Подготавливает пространство имен для возможности использования
-	 * в качестве имени переменной.
-	 * 
-	 * @param type $namespace
-	 * @return type
-	 */
-	private function prepare_namespace( $namespace )
-	{
-		$from	= array( 'metamorphoze\\', '\\' );
-		$to		= array( '', '_' );
-		return str_replace( $from, $to, strtolower( $namespace ) );
 	}
 
 }
