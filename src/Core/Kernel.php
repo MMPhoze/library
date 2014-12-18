@@ -14,6 +14,4 @@ class Kernel {
 		$this->parse_request();
 	}
 	
-
-	
 }
