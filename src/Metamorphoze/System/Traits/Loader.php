@@ -1,6 +1,6 @@
 <?php
 
-namespace Metamorphoze\Core\Traits;
+namespace Metamorphoze\System\Traits;
 
 trait Loader {
 
@@ -40,33 +40,26 @@ trait Loader {
 	 */
 	public function &load( &$class, $alias = NULL )
 	{
-		switch ( gettype( $class ) ) {
-
+		switch ( gettype( $class ) )
+		{
 			case 'string' :
-
 				return $this->load_class( $class, $alias );
 
-				break;
-
 			case 'object' :
-
 				return $this->load_object( $class, $alias );
 
-				break;
-
 			case 'array' :
-
-				foreach ( $class as $key => $value ) {
-
-					if ( is_class_name( $key ) ) {
+				foreach ( $class as $key => $value )
+				{
+					if ( is_class_name( $key ) )
+					{
 						$this->load( $value, $key );
 					}
-					else {
+					else
+					{
 						$this->load( $value );
 					}
 				}
-
-				break;
 		}
 	}
 
@@ -74,26 +67,42 @@ trait Loader {
 	// Методы загрузки классов :
 	//=========================================================================
 
+	/**
+	 * Создает экземпляр класса
+	 * 
+	 * @param	string	$class	Имя класса
+	 * @param	string	$alias	Псевдоним класса
+	 * @return	object
+	 */
 	private function &load_class( $class, $alias )
 	{
-
-		if ( $alias === NULL ) {
+		if ( $alias === NULL )
+		{
 			$name = $this->prepare_namespace( $class );
 		}
-		else {
+		else
+		{
 			$name = $this->prepare_namespace( $alias );
 		}
 
 		return $this->{$name} = new $class();
 	}
 
+	/**
+	 * Получает ссылку на объект класса.
+	 * 
+	 * @param	object	$class	Объект класса
+	 * @param	string	$alias	Псевдоним класса
+	 * @return	object
+	 */
 	private function &load_object( &$class, $alias )
 	{
-
-		if ( $alias === NULL ) {
+		if ( $alias === NULL )
+		{
 			$name = $this->prepare_namespace( get_class( $class ) );
 		}
-		else {
+		else
+		{
 			$name = $this->prepare_namespace( $alias );
 		}
 
@@ -104,8 +113,8 @@ trait Loader {
 	 * Подготавливает пространство имен для возможности использования
 	 * в качестве имени переменной.
 	 * 
-	 * @param type $namespace
-	 * @return type
+	 * @param	string	$namespace
+	 * @return	string	
 	 */
 	private function prepare_namespace( $namespace )
 	{
